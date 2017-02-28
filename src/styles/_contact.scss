@@ -1,0 +1,13 @@
+.ContactP {
+  padding-top: 5vw;
+
+  &__deck {
+    font-family: 'Nunito', sans-serif;
+    font-size: 18px;
+    letter-spacing: 0.1em;
+
+    b {
+      font-size: 150%;
+    }
+  }
+}

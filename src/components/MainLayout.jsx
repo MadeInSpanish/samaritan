@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router'
 
 export default class Home extends Component {
   render() {
@@ -13,10 +14,15 @@ export default class Home extends Component {
 
           </div>
           <ul className="lay1__list">
-            <li className="lay1__item">About</li>
-            <li className="lay1__item">Support</li>
-            <li className="lay1__item">Contact Us</li>
-            <li className="lay1__item">Networks</li>
+            <li className="lay1__item">
+              <Link to="/about/" className="lay1__link">About</Link>
+            </li>
+            <li className="lay1__item">
+              <Link to="/contact/" className="lay1__link">Contact Us</Link>
+            </li>
+            <li className="lay1__item">
+              <Link to="/networks/" className="lay1__link">Networks</Link>
+            </li>
           </ul>
           <form action="" className="lay1__search">
             <input type="search" placeholder="Search" className="lay1__input" />
