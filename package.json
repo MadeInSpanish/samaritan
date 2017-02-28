@@ -4,14 +4,11 @@
   "private": true,
   "dependencies": {
     "classnames": "^2.2.5",
-    "cors": "^2.8.1",
-    "keyword-extractor": "0.0.13",
-    "natural": "^0.5.0",
+    "pushstate-server": "^2.2.2",
     "react": "15.4.2",
     "react-dom": "15.4.2",
     "react-masonry-component": "^5.0.3",
-    "react-router": "^3.0.2",
-    "x-ray": "^2.3.2"
+    "react-router": "^3.0.2"
   },
   "devDependencies": {
     "node-sass": "^4.5.0",
@@ -21,8 +18,7 @@
   "scripts": {
     "build-css": "node-sass src/ -o src/",
     "watch-css": "npm run build-css && node-sass src/ -o src/ --watch --recursive",
-    "start-js": "react-scripts start",
-    "start": "npm-run-all -p watch-css start-js",
+    "start": "pushstate-server build",
     "build": "npm run build-css && react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
