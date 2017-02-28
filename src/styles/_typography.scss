@@ -1,3 +1,10 @@
+@import url('https://fonts.googleapis.com/icon?family=Material+Icons');
+@import url('https://fonts.googleapis.com/css?family=Nunito|Inconsolata');
+
 @mixin regular-font {
   font-family: 'Nunito', sans-serif;
+}
+
+@mixin inconsolata-font {
+  font-family: 'Inconsolata', sans-serif;
 }
