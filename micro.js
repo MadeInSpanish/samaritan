@@ -1,18 +1,22 @@
+const keyword_extractor = require("keyword-extractor");
+const querystring = require('querystring');
+const Xray = require('x-ray')
+const natural = require('natural')
 const express = require('express')
 const cors = require('cors')
 const app = express();
 
 app.use(cors());
 
-
-
-
-const querystring = require('querystring');
-const keyword_extractor = require("keyword-extractor");
-const Xray = require('x-ray')
-const natural = require('natural')
+const extractorOptions = {
+  language: "english",
+  remove_digits: true,
+  return_changed_case: true,
+  remove_duplicates: true,
+}
 
 const word2rep = '(adsbygoogle = window.adsbygoogle || []).push({});'
+
 const xray = new Xray({
   filters: {
     trim: val => typeof val === 'string' ? val.replace(/(\r\n|\n|\r)/gm,"") : value,
@@ -20,23 +24,17 @@ const xray = new Xray({
   }
 })
 
-
 app.get('/', function(req, res, next){
   const web = querystring.parse( req.url.replace('/?', '') ) || { web: '' }
 
   if ('web' in web) {
     xray(web.web, {
       title: 'title',
-      article: 'article .entry-content | trim | removeAnalytics'
+      article: '.article-content | trim | removeAnalytics'
     })((err, obj) => {
       const save = []
       const tfidf = new natural.TfIdf()
-      const data = keyword_extractor.extract(obj.article,{
-        language: "spanish",
-        remove_digits: true,
-        return_changed_case: true,
-        remove_duplicates: true,
-      });
+      const data = keyword_extractor.extract(obj.article, extractorOptions);
 
       tfidf.addDocument(data)
       tfidf.listTerms(0).forEach((item, index) => {
@@ -45,11 +43,9 @@ app.get('/', function(req, res, next){
         }
       })
 
-
       res.json({ words: save });
     })
   }
-
 });
 
 app.listen(3001, function(){
