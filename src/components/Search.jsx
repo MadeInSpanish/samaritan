@@ -35,7 +35,7 @@ var masonryOptions = {
 }
 
 const accessToken = '76e6553f7e841028ffa494b8b69ffc14de8e5aa6cf03c4e534ef9f3ee83cb18a'
-
+const wwwords = ['business', 'electronics', 'people']
 export default class Search extends Component {
   constructor() {
     super()
@@ -60,11 +60,14 @@ export default class Search extends Component {
         })
 
         json.words.map(async word => {
-          console.log(word);
           await fetch(`https://api.unsplash.com/search/photos?page=2&query=${word}&access_token=${accessToken}`)
             .then(res => res.json())
             .then(json => {
-              console.log(json)
+              this.setState({
+                images: this.state.images.concat(json.results),
+                loadingWords: false,
+                loadingImages: true,
+              })
             } )
         })
       })
@@ -91,18 +94,18 @@ export default class Search extends Component {
           disableImagesLoaded={false} // default false
           updateOnEachImageLoad={false} // default false and works only if disableImagesLoaded is false
         >
-          {demo.map(image => (
-            <li key={image} className="masonry__item">
-              <Link to={{ pathname: '/search/zoom/', query: { image } }}>
-                <img src={image} className="masonry__image" role="presentation" />
-              </Link>
-            </li>
-          ))}
-
           {this.state.images.map(image => (
             <li key={image.id} className="masonry__item">
               <Link to={{ pathname: '/search/zoom/', query: { image: image.urls.regular } }}>
                 <img src={image.urls.regular} className="masonry__image" role="presentation" />
+              </Link>
+            </li>
+          ))}
+
+          {demo.map(image => (
+            <li key={image} className="masonry__item">
+              <Link to={{ pathname: '/search/zoom/', query: { image } }}>
+                <img src={image} className="masonry__image" role="presentation" />
               </Link>
             </li>
           ))}

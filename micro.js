@@ -30,7 +30,7 @@ app.get('/', function(req, res, next){
   if ('web' in web) {
     xray(web.web, {
       title: 'title',
-      article: '.article-content | trim | removeAnalytics'
+      article: 'article | trim | removeAnalytics'
     })((err, obj) => {
       const save = []
       const tfidf = new natural.TfIdf()
