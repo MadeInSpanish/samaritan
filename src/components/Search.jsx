@@ -34,22 +34,65 @@ var masonryOptions = {
     transitionDuration: 300
 }
 
-export default class Search extends Component {
-  render() {
-    const { location: { query } } = this.props
+const accessToken = '76e6553f7e841028ffa494b8b69ffc14de8e5aa6cf03c4e534ef9f3ee83cb18a'
 
+export default class Search extends Component {
+  constructor() {
+    super()
+
+    this.state = {
+      words: [],
+      images: [],
+      loadingWords: true,
+      loadingImages: false,
+    }
+  }
+
+  componentWillMount() {
+    const { location: { query } } = this.props
+    fetch(`http://localhost:3001/?web=${query.q}`)
+      .then(res => res.json())
+      .then(json => {
+        this.setState({
+          words: json.words,
+          loadingWords: false,
+          loadingImages: true,
+        })
+
+        fetch(`https://api.unsplash.com/search/photos?page=1&query=office&access_token=${accessToken}`)
+          .then(res => res.json())
+          .then(json => {
+            this.setState({
+              images: json.results,
+              loadingImages: false,
+            })
+
+            fetch(`https://api.unsplash.com/search/photos?page=2&query=office&access_token=${accessToken}`)
+              .then(res => res.json())
+              .then(json => {
+                this.setState({
+                  images: this.state.images.concat(json.results),
+                  loadingImages: false,
+                })
+              } )
+          } )
+      })
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    console.log('state', this.state);
+  }
+
+  render() {
     return (
       <div>
-        <header className="masonry__header">
-          <h1 className="masonry__headline">Inspiration <span className="masonry__deck">with 230 photos</span>
-          </h1>
-          <ul className="masonry__tagsList">
-            <li className="masonry__tags"><h3>Keywords founded!</h3></li>
-            <li className="masonry__tags">Business</li>
-            <li className="masonry__tags">Time</li>
-            <li className="masonry__tags">People</li>
-          </ul>
-        </header>
+        <h3>Keywords founded!</h3>
+        <ul className="masonry__tagsList">
+          {this.state.words.map((word, index) =>
+            <li className="masonry__tags" key={`${word}${index}`}>{word}</li>
+          )}
+        </ul>
+        <h1 className="masonry__headline">Inspiration <span className="masonry__deck">with 230 photos</span> </h1>
         <Masonry
           className={'masonry__list'} // default ''
           elementType={'ul'} // default 'div'
@@ -61,6 +104,14 @@ export default class Search extends Component {
             <li key={image} className="masonry__item">
               <Link to={{ pathname: '/search/zoom/', query: { image } }}>
                 <img src={image} className="masonry__image" />
+              </Link>
+            </li>
+          ))}
+
+          {this.state.images.map(image => (
+            <li key={image.id} className="masonry__item">
+              <Link to={{ pathname: '/search/zoom/', query: { image: image.urls.regular } }}>
+                <img src={image.urls.regular} className="masonry__image" />
               </Link>
             </li>
           ))}
