@@ -1,13 +1,23 @@
 .NetworksP {
-  padding-top: 5vw;
+  padding-top: 2vw;
 
   &__deck {
     font-family: 'Nunito', sans-serif;
-    font-size: 18px;
-    letter-spacing: 0.1em;
+    font-size: 2.5vw;
 
     b {
-      font-size: 150%;
+      font-size: 120%;
     }
+  }
+
+  &__image {
+    background-color: #fff;
+    margin: 0 30px 20px 0;
+    width: 30%;
+  }
+
+  &__item {
+    display: inline;
+    list-style: none;
   }
 }
