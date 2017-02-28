@@ -1,0 +1,72 @@
+.zoomp {
+  padding-bottom: 10px;
+  position: relative;
+
+  &__image {
+    max-width: 100%;
+  }
+
+  &__list {
+    list-style: none;
+    text-align: right;
+  }
+
+  &__item {
+    display: inline-block;
+
+    &:nth-child(1) {
+      button:hover {
+        i {
+          color: yellow;
+        }
+      }
+    }
+
+    &:nth-child(2) {
+      button:hover {
+        i {
+          color: deeppink;
+        }
+      }
+    }
+
+    &:nth-child(3) {
+      button:hover {
+        i {
+          color: white;
+        }
+      }
+    }
+  }
+
+  &__btn {
+    align-items: center;
+    background-color: $dark-gray;
+    border: 0;
+    border-radius: 5px;
+    color: lighten(gray, 10%);
+    display: flex;
+    padding: 7px 20px;
+    margin-left: 10px;
+
+    &:focus {
+      outline: 0;
+    }
+
+    &:hover {
+      background: lighten($dark-gray, 10%);
+      cursor: pointer;
+    }
+
+    &.back {
+      position: absolute;
+      left: -10px;
+    }
+
+    i {
+      font-size: 16px;
+      margin-right: 4px;
+    }
+  }
+
+}

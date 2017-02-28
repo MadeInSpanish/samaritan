@@ -1,0 +1,52 @@
+.masonry {
+
+  &__deck {
+    color: gray;
+    font-size: 50%;
+  }
+
+  &__header {
+    align-items: baseline;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__image {
+    min-height: 150px;
+    margin-left: 2px;
+    margin-right: 2px;
+    width: 300px;
+  }
+
+  &__list {
+    margin-top: 0;
+    list-style: none;
+  }
+
+  &__tagsList {
+  }
+
+  &__tags {
+    background: $dark-gray;
+    display: inline-block;
+    margin-right: 10px;
+    padding: 5px 10px;
+
+    &:nth-child(1) {
+      background: transparent;
+      padding: 0;
+    }
+  }
+}
+
+.searchp {
+  &__infinite {
+    letter-spacing: 0.05em;
+    margin: 5vw;
+    text-align: center;
+    i {
+      font-size: 40px;
+      margin-bottom: 10px;
+    }
+  }
+}

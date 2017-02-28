@@ -1,0 +1,48 @@
+.lay1 {
+
+  &__body {
+    margin: auto;
+    max-width: 1024px;
+  }
+
+  &__header {
+    background-color: $dark-gray;
+    display: flex;
+    justify-content: space-between;
+    padding: 15px
+  }
+
+  &__input {
+    background-color: lighten($dark-gray, 5%);
+    border: 0;
+    border-radius: 5px;
+    padding: 5px 10px;
+  }
+
+  &__item {
+    display: inline-block;
+    margin-right: 10px;
+    margin-left: 10px;
+  }
+
+  &__list {
+    margin: 0;
+    padding: 0;
+  }
+}
+
+.logo {
+  align-items: center;
+  display: inline-flex;
+  color: #fff;
+  line-height: 1.1;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-size: 18px;
+  font-weight: bold;
+  letter-spacing: 0.05em;
+  float: left;
+  i {
+    margin-right: 3px;
+  }
+}

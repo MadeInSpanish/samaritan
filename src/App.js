@@ -1,21 +1,27 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react'
+import { Router, Route, Link, browserHistory, IndexRoute } from 'react-router'
+
+import MainLayout from './components/MainLayout'
+import Home from './components/Home'
+import Search from './components/Search'
+import Zoom from './components/Zoom'
+import NoMatch from './components/NoMatch'
+
+import './App.css'
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
-        </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-      </div>
+      <Router history={browserHistory}>
+        <Route path="/" component={MainLayout}>
+          <IndexRoute component={Home} />
+          <Route path="/search/" component={Search}/>
+          <Route path="/search/zoom" component={Zoom}/>
+          <Route path="*" component={NoMatch}/>
+        </Route>
+      </Router>
     );
   }
 }
 
-export default App;
+export default App

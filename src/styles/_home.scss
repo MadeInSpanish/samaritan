@@ -1,0 +1,67 @@
+.homeP {
+  padding-top: 5vw;
+
+  &__deck {
+    font-family: 'Nunito', sans-serif;
+    font-size: 18px;
+    letter-spacing: 0.1em;
+    text-align: center;
+
+    b {
+      font-size: 150%;
+    }
+  }
+
+  &__form {
+    padding-top: 3vw;
+    text-align: center;
+  }
+
+  &__howtoContainer {
+    background-color: #fff;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 70px;
+    // padding-top: 20vw;
+    text-align: center;
+  }
+
+  &__howto {
+    color: $sea-green;
+    font-weight: bold;
+    display: inline-block;
+    letter-spacing: 0.05em;
+    line-height: 1;
+    margin: 25px auto 0;
+    text-decoration: none;
+
+    &:hover,
+    &:visited {
+      border-bottom: 1px $sea-green dashed;
+    }
+  }
+
+  &__input {
+    border: 0;
+    border-bottom: 3px $dark-gray solid;
+    background-color: transparent;
+    color: #fff;
+    font-size: 20px;
+    padding: 20px;
+    text-transform: capitalize;
+    width: 80%;
+
+    &:focus {
+      border-bottom: 3px $sea-green solid;
+      outline: 0;
+    }
+  }
+
+  &__slogan {
+    font-family: 'Nunito', sans-serif;
+    font-size: 4.5vw;
+    text-align: center;
+  }
+}
