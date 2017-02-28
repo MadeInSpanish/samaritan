@@ -1,4 +1,5 @@
 .homeP {
+  padding-bottom: 10vw;
   padding-top: 5vw;
 
   &__deck {
@@ -9,6 +10,20 @@
 
     b {
       font-size: 150%;
+    }
+  }
+
+  &__eg {
+    background-color: transparent;
+    border: 0;
+    color: $dark-gray;
+    cursor: pointer;
+    padding: 10px 20px;
+    text-align: left;
+    margin-left: -12vw;
+
+    &:hover {
+      text-decoration: underline;
     }
   }
 
