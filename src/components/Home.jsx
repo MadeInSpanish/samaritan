@@ -16,7 +16,7 @@ export default class Home extends Component {
 
 
         <div className="homeP__howtoContainer">
-          <Link to="/how-to" className="homeP__howto">How it works</Link>
+          <Link to="/how-to/" className="homeP__howto">How it works</Link>
         </div>
       </div>
     )
