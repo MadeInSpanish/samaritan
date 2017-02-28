@@ -5,7 +5,7 @@ export default class About extends Component {
     return (
       <div className="AboutP">
         <h5 className="AboutP__deck">
-          <b>Samaritan</b>
+          <b>About</b>
         </h5>
       </div>
     )
