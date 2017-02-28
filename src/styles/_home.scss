@@ -17,32 +17,6 @@
     text-align: center;
   }
 
-  &__howtoContainer {
-    background-color: #fff;
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 70px;
-    // padding-top: 20vw;
-    text-align: center;
-  }
-
-  &__howto {
-    color: $sea-green;
-    font-weight: bold;
-    display: inline-block;
-    letter-spacing: 0.05em;
-    line-height: 1;
-    margin: 25px auto 0;
-    text-decoration: none;
-
-    &:hover,
-    &:visited {
-      border-bottom: 1px $sea-green dashed;
-    }
-  }
-
   &__input {
     border: 0;
     border-bottom: 3px $dark-gray solid;

@@ -1,13 +1,36 @@
-.HowToP {
-  padding-top: 5vw;
+.howtop {
+  background-color: #fff;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 70px;
+  text-align: center;
+  transition: height 200ms ease;
 
-  &__deck {
-    font-family: 'Nunito', sans-serif;
-    font-size: 18px;
-    letter-spacing: 0.1em;
+  &.open {
+    height: 50vh;
+  }
 
-    b {
-      font-size: 150%;
+  &__button {
+    background: transparent;
+    border: 0;
+    color: $sea-green;
+    cursor: pointer;
+    font-weight: bold;
+    display: inline-block;
+    letter-spacing: 0.05em;
+    line-height: 1;
+    margin: 25px auto 0;
+    text-decoration: none;
+
+    &:hover,
+    &:visited {
+      border-bottom: 1px $sea-green dashed;
+    }
+
+    &:focus {
+      outline: 0;
     }
   }
 }

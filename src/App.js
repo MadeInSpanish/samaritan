@@ -7,7 +7,6 @@ import About from './components/About'
 import Contact from './components/Contact'
 import Networks from './components/Networks'
 import Search from './components/Search'
-import HowTo from './components/HowTo'
 import Zoom from './components/Zoom'
 import NoMatch from './components/NoMatch'
 
@@ -24,7 +23,6 @@ class App extends Component {
           <Route path="/networks/" component={Networks} />
           <Route path="/search/" component={Search}/>
           <Route path="/search/zoom" component={Zoom}/>
-          <Route path="/how-to/" component={HowTo} />
           <Route path="*" component={NoMatch}/>
         </Route>
       </Router>

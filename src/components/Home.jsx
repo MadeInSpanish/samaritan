@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router'
 
+import HowTo from './HowTo'
+
 export default class Home extends Component {
   render() {
     return (
@@ -15,9 +17,7 @@ export default class Home extends Component {
         </form>
 
 
-        <div className="homeP__howtoContainer">
-          <Link to="/how-to/" className="homeP__howto">How it works</Link>
-        </div>
+        <HowTo />
       </div>
     )
   }
