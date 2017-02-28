@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router'
 
 export default class Home extends Component {
   render() {
@@ -43,7 +42,7 @@ export default class Home extends Component {
             </button>
           </li>
         </ul>
-        <img src={image} className="zoomp__image" />
+        <img src={image} className="zoomp__image" role="presentation" />
       </div>
     )
   }

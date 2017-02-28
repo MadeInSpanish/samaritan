@@ -59,23 +59,14 @@ export default class Search extends Component {
           loadingImages: true,
         })
 
-        fetch(`https://api.unsplash.com/search/photos?page=1&query=office&access_token=${accessToken}`)
-          .then(res => res.json())
-          .then(json => {
-            this.setState({
-              images: json.results,
-              loadingImages: false,
-            })
-
-            fetch(`https://api.unsplash.com/search/photos?page=2&query=office&access_token=${accessToken}`)
-              .then(res => res.json())
-              .then(json => {
-                this.setState({
-                  images: this.state.images.concat(json.results),
-                  loadingImages: false,
-                })
-              } )
-          } )
+        json.words.map(async word => {
+          console.log(word);
+          await fetch(`https://api.unsplash.com/search/photos?page=2&query=${word}&access_token=${accessToken}`)
+            .then(res => res.json())
+            .then(json => {
+              console.log(json)
+            } )
+        })
       })
   }
 
@@ -103,7 +94,7 @@ export default class Search extends Component {
           {demo.map(image => (
             <li key={image} className="masonry__item">
               <Link to={{ pathname: '/search/zoom/', query: { image } }}>
-                <img src={image} className="masonry__image" />
+                <img src={image} className="masonry__image" role="presentation" />
               </Link>
             </li>
           ))}
@@ -111,7 +102,7 @@ export default class Search extends Component {
           {this.state.images.map(image => (
             <li key={image.id} className="masonry__item">
               <Link to={{ pathname: '/search/zoom/', query: { image: image.urls.regular } }}>
-                <img src={image.urls.regular} className="masonry__image" />
+                <img src={image.urls.regular} className="masonry__image" role="presentation" />
               </Link>
             </li>
           ))}

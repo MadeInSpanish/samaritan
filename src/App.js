@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Router, Route, Link, browserHistory, IndexRoute } from 'react-router'
+import { Router, Route, browserHistory, IndexRoute } from 'react-router'
 
 import MainLayout from './components/MainLayout'
 import Home from './components/Home'
