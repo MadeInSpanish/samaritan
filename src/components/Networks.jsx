@@ -6,7 +6,7 @@ export default class Networks extends Component {
     return (
       <div className="NetworksP">
         <h5 className="NetworksP__deck">
-          <b>Samaritan</b> has been possible using:
+          <b>The Machine</b> has been possible using:
         </h5>
         <ul className="NetworksP__list">
           <NetworkItem network="unsplash"/>

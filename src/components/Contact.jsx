@@ -17,7 +17,7 @@ export default class Contact extends Component {
             />
             <textarea
               name="name"
-              placeholder="I love Samaritan"
+              placeholder="I love The Machine"
               className="ContactP__input"
               rows="7"
             />

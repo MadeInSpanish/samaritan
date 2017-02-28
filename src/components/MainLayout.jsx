@@ -9,7 +9,7 @@ export default class Home extends Component {
           <div className="lay1__headerLeft">
             <a href="/" className="logo">
               <i className="material-icons">group_work</i>
-              Samaritan
+              The Machine
             </a>
 
           </div>
