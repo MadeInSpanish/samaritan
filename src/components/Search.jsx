@@ -35,7 +35,7 @@ var masonryOptions = {
 }
 
 const accessToken = '76e6553f7e841028ffa494b8b69ffc14de8e5aa6cf03c4e534ef9f3ee83cb18a'
-const wwwords = ['business', 'electronics', 'people']
+
 export default class Search extends Component {
   constructor() {
     super()
