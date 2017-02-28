@@ -5,8 +5,8 @@ const NetworkItem = ({ network }) => {
     <li className="NetworksP__item">
       <a href={'https://www.' + network + '.com'} target="_blank">
         <img
-          src={require(`../images/${network}.png`)}
-          alt={ network }
+          src={`/images/${network}.png`}
+          alt={network}
           className="NetworksP__image"
           />
       </a>

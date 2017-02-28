@@ -21,8 +21,10 @@
 
   &__item {
     display: inline-block;
-    margin-right: 10px;
+    letter-spacing: 0.06em;
     margin-left: 10px;
+    margin-right: 10px;
+    padding-top: 3px;
   }
 
   &__list {
@@ -33,10 +35,16 @@
   &__link {
     color: #fff;
     text-decoration: none;
+
+    &:hover {
+      border-bottom: 1px dashed lighten(gray, 20%);
+    }
   }
 }
 
 .logo {
+  @include regular-font;
+  
   align-items: center;
   display: inline-flex;
   color: #fff;

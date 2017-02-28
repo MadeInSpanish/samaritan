@@ -1,6 +1,6 @@
 .ContactP {
   &__deck {
-    font-family: 'Nunito', sans-serif;
+    @include regular-font;
     font-size: 2.5vw;
     text-align: center;
   }

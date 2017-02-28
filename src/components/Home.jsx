@@ -13,7 +13,7 @@ export default class Home extends Component {
         <h1 className="homeP__slogan">Pictures & Inspiration Royalty Free</h1>
 
         <form action="search/" className="homeP__form">
-          <input type="text" name="q" placeholder="paste ur blog entry URL" className="homeP__input"/>
+          <input type="text" name="q" placeholder="Paste your blog entry URL" className="homeP__input"/>
         </form>
 
 
