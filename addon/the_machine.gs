@@ -1,17 +1,17 @@
 // Google function to create a menu in the doc
 function onOpen(e) {
   DocumentApp
-    .getUi()
-    .createAddonMenu()
-    .addItem('The Machine', 'the_machine')
-    .addToUi();
+      .getUi()
+      .createAddonMenu()
+      .addItem('Get Powerful Images', 'getImages')
+      .addToUi();
 }
 
 function onInstall(e) {
   onOpen(e);
 }
 
-function the_machine() {
+function getImages() {
   // Get the Google Doc
   var doc = DocumentApp.getActiveDocument();
 
