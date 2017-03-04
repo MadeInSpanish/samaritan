@@ -10,23 +10,18 @@ export default class Home extends Component {
           Say Hello, to <b>Samaritan</b>, analize your blog entries and get
         </h5>
         <h1 className="homeP__slogan">Pictures & Inspiration Royalty Free</h1>
-
         <form action="search/" className="homeP__form">
-          <input
-            type="text"
+          <textarea
             name="q"
-            placeholder="Paste your blog entry URL"
-            className="homeP__input"
+            placeholder="Paste your blog entry "
+            className="homeP__textarea"
             ref={node => { this.input = node; }}
+            rows="10"
+            cols="50"
           />
           <br />
-          <button className="homeP__eg" onClick={event => {
-            this.input.value = 'https://www.washingtonpost.com/news/innovations/wp/2017/02/24/listen-technology-holdouts-enough-is-enough/'
-          }}>
-            e.g. https://www.washingtonpost.com/news/innovations/wp/2017/02/24/listen-technology-holdouts-enough-is-enough/
-          </button>
+          <input type="submit" value="Submit" className="homeP__submit"/>
         </form>
-
 
         <HowTo />
       </div>
