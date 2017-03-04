@@ -30,19 +30,21 @@
   &__form {
     padding-top: 3vw;
     text-align: center;
+
   }
 
-  &__input {
+  &__textarea {
     border: 0;
-    border-bottom: 3px $dark-gray solid;
+    border: 3px $dark-gray solid;
     background-color: transparent;
     color: #fff;
     font-size: 20px;
     padding: 20px;
     width: 80%;
+    margin-bottom: 3vh;
 
     &:focus {
-      border-bottom: 3px $sea-green solid;
+      border: 1px $sea-green solid;
       outline: 0;
     }
   }
@@ -51,5 +53,20 @@
     @include regular-font;
     font-size: 4.5vw;
     text-align: center;
+  }
+
+  &__submit {
+    text-transform: uppercase;
+    outline: 0;
+    background: #29c28a;
+    width: 100%;
+    border: 0;
+    padding: 15px;
+    color: #FFFFFF;
+    font-size: 14px;
+    -webkit-transition: all 0.3 ease;
+    transition: all 0.3 ease;
+    max-width: 300px;
+    cursor: pointer;
   }
 }

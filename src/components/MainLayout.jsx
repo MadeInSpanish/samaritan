@@ -24,9 +24,6 @@ export default class Home extends Component {
               <Link to="/networks/" className="lay1__link">Networks</Link>
             </li>
           </ul>
-          <form action="/search/" className="lay1__search">
-            <input type="search" name="q" placeholder="Paste url" className="lay1__input" />
-          </form>
         </header>
 
         <div className="lay1__body">
