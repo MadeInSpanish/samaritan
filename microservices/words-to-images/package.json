@@ -4,7 +4,7 @@
   "description": "",
   "main": "micro.js",
   "scripts": {
-    "dev": "node -r dotenv/config micro.js",
+    "dev": "nodemon -r dotenv/config micro.js",
     "start": "node micro.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -18,5 +18,8 @@
     "express": "^4.15.0",
     "querystring": "^0.2.0",
     "superagent": "^3.5.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.11.0"
   }
 }
