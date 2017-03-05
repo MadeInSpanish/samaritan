@@ -106,24 +106,10 @@ function normalizeData(array, from) {
 
       case 'splashbase':
         return [ ...accumulator,  normalizers.splashbase(element)]
+
       default:
         return []
     }
-
-
-    // try {
-    //   // splashBase
-    // } catch (err) { }
-    //
-    // try {
-    //   // pexels
-    //   return [ ...accumulator, {
-    //     id: element.url,
-    //     url: element.src.large,
-    //     download: element.src.original,
-    //     small: element.src.small,
-    //   } ]
-    // } catch (err) { }
 
   }, [])
 }
