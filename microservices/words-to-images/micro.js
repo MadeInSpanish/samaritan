@@ -20,10 +20,12 @@ function fetchAllAPIs(query) {
       .query({ access_token: TOKENS.unsplash })
       .query({ query })
 
-    const splashBase = yield superagent
-      .get('http://www.splashbase.co/api/v1/images/search')
-      .timeout({ response: 5000 })
-      .query({ query: 'building' })
+    // REALLY SLOW API SPLASHBASE
+    //
+    // const splashBase = yield superagent
+    //   .get('http://www.splashbase.co/api/v1/images/search')
+    //   .timeout({ response: 5000 })
+    //   .query({ query: 'building' })
 
     // TODO
     // To get access to our API write us an email to api@pexels.com.
@@ -61,11 +63,11 @@ function fetchAllAPIs(query) {
     //   small
     // }
 
-    console.log(JSON.parse(splashBase.text).images);
+    // console.log(JSON.parse(splashBase.text).images);
 
     return images
       .concat(normalizeData(JSON.parse(unsplash.text).results))
-      .concat(normalizeData(JSON.parse(splashBase.text).images))
+      // .concat(normalizeData(JSON.parse(splashBase.text).images))
       // .concat(JSON.parse(pexels.text).photos)
   }
 }
@@ -90,7 +92,7 @@ function normalizeData(array) {
         id: element.id,
         url: element.urls.regular,
         download: element.links.download,
-        small: element.urls.small,
+        small: element.urls.thumb,
       } ]
     } catch (err) { }
 

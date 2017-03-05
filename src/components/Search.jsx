@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import Masonry from 'react-masonry-component'
-import LazyLoad from 'react-lazyload'
 import { Link } from 'react-router'
+import cx from 'classnames'
 
 const demo = [
   "https://images.unsplash.com/reserve/NV0eHnNkQDHA21GC3BAJ_Paris%20Louvr.jpg?dpr=1&auto=format&fit=crop&w=1199&h=799&q=80&cs=tinysrgb&crop=",
@@ -44,24 +44,43 @@ export default class Search extends Component {
       images: [],
       loadingWords: true,
       loadingImages: false,
+      currentWord: null,
+      totalImages: 0,
     }
+
+    this.handleWordClick = this.handleWordClick.bind(this)
   }
 
   componentDidMount() {
-    this.fetchImages()
+    this.setInitialFetch()
   }
 
   render() {
+    const {
+      currentWord,
+      totalImages,
+    } = this.state
+
     return (
       <div>
-        <h3>Keywords founded!</h3>
+        <h3>Keywords founded! <small className="masonry__deck">Click words to change inspiration</small></h3>
         <ul className="masonry__tagsList">
-          {this.state.words.map((word, index) =>
-            <li className="masonry__tags" key={`${word}${index}`}>{word}</li>
-          )}
+          {this.state.words.map((word, index) => {
+            const classNames = cx('masonry__wordBtn', {
+              current: currentWord === word,
+            })
+
+            return (
+              <li className="masonry__tags" key={`${word}${index}`}>
+                <button className={classNames} onClick={this.handleWordClick}>{word}</button>
+              </li>
+            )
+          })}
         </ul>
 
-        <h1 className="masonry__headline">Inspiration <span className="masonry__deck">with 230 photos</span> </h1>
+        <h1 className="masonry__headline">Inspiration&nbsp;
+          <small className="masonry__deck">for <b>{currentWord}</b> with {totalImages} photos</small>
+        </h1>
 
         <Masonry
           className={'masonry__list'}
@@ -80,9 +99,7 @@ export default class Search extends Component {
                   download: image.download,
                 }
               }}>
-                <LazyLoad throttle={200} height={200} once offset={100} >
-                  <img src={image.small} className="masonry__image" role="presentation" />
-                </LazyLoad>
+                <img src={image.small} className="masonry__image" role="presentation" />
               </Link>
             </li>
           )})}
@@ -105,8 +122,7 @@ export default class Search extends Component {
     )
   }
 
-  fetchImages() {
-
+  setInitialFetch() {
     const {
       location: {
         query: {
@@ -116,22 +132,30 @@ export default class Search extends Component {
     } = this.context.router
 
     const words = decodeURIComponent(q).split(',') || []
+    const currentWord = encodeURIComponent(words[0])
 
-    fetch(`http://localhost:5000/?word=business`)
+    this.fetchImages(currentWord)
+    this.setState({ words })
+  }
+
+  fetchImages(currentWord) {
+    fetch(`http://localhost:5000/?word=${currentWord}`)
       .then(res => res.json())
-      .then(json => {
-        console.log(json);
+      .then(images => {
+        console.log(images);
         this.setState({
-          words,
-          images: this.state.images.concat(json),
+          images,
+          currentWord,
           loadingWords: false,
           loadingImages: true,
+          totalImages: images.length,
         })
       })
+  }
 
-    words.map(word => {
-      const encodedWord = encodeURIComponent(word)
-    })
+  handleWordClick(e) {
+    const currentWord = encodeURIComponent(e.currentTarget.innerHTML)
+    this.fetchImages(currentWord)
   }
 }
 

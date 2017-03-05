@@ -2,7 +2,6 @@
 
   &__deck {
     color: gray;
-    font-size: 50%;
   }
 
   &__header {
@@ -29,11 +28,33 @@
   }
 
   &__tags {
-    background: $dark-gray;
     display: inline-block;
     margin-right: 5px;
     margin-bottom: 5px;
+  }
+
+  &__wordBtn {
+    background: $dark-gray;
+    color: #fff;
+    cursor: pointer;
+    border: none;
     padding: 5px 10px;
+
+    &:hover {
+      background-color: $sea-green;
+    }
+
+    &:focus {
+      outline: 0;
+    }
+
+    &.current {
+      border-bottom: 2px solid $sea-green;
+      &:hover {
+        cursor: default;
+        background-color: $dark-gray;
+      }
+    }
   }
 }
 
