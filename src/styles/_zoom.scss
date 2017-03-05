@@ -15,7 +15,7 @@
     display: inline-block;
 
     &:nth-child(1) {
-      button:hover {
+      a:hover {
         i {
           color: yellow;
         }
@@ -46,8 +46,10 @@
     border-radius: 5px;
     color: lighten(gray, 10%);
     display: flex;
+    font-size: 13px;
     padding: 7px 20px;
     margin-left: 10px;
+    text-decoration: none;
 
     &:focus {
       outline: 0;
@@ -55,6 +57,7 @@
 
     &:hover {
       background: lighten($dark-gray, 10%);
+      color: lighten(gray, 30%);
       cursor: pointer;
     }
 

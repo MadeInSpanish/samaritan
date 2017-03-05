@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router'
 
-export default class Home extends Component {
+export default class MainLayout extends Component {
   render() {
     return (
       <div className="lay1">

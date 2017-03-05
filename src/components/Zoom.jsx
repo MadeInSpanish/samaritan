@@ -1,16 +1,15 @@
 import React, { Component } from 'react'
 
-export default class Home extends Component {
+export default class Zoom extends Component {
   render() {
     const {
       location: {
         query: {
-          image = ''
+          image = '',
+          download = ''
         } = {}
       } = {}
     } = this.props || {}
-
-    console.log(this.props);
 
     return (
       <div className="zoomp">
@@ -22,10 +21,10 @@ export default class Home extends Component {
         <ul className="zoomp__list">
 
           <li className="zoomp__item">
-            <button className="zoomp__btn">
+            <a href={download || "#"} className="zoomp__btn">
               <i className="material-icons">file_download</i>
               Download
-            </button>
+            </a>
           </li>
 
           <li className="zoomp__item">

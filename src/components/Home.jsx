@@ -59,7 +59,6 @@ export default class Home extends Component {
     fetch(`https://microservices-samaritan.now.sh/?body=${this.state.text}`, { method: 'POST' })
       .then(res => res.json())
       .then(json => {
-        console.log('json', json);
         browserHistory.push(`/search/?q=${encodeURIComponent(json.words.join())}`)
       })
 
