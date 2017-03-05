@@ -8,7 +8,6 @@ function handleTabs(tabs){
 }
 
 function handleMessageResponse(response) {
-  console.log('response', response);
   if (typeof response === 'string' && response.length > 140) {
 
     var xhr = new XMLHttpRequest();
