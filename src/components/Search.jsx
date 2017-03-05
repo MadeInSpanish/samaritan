@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import Masonry from 'react-masonry-component'
+import LazyLoad from 'react-lazyload'
 import { Link } from 'react-router'
 
 const demo = [
@@ -34,11 +35,6 @@ var masonryOptions = {
     transitionDuration: 300
 }
 
-// '76e6553f7e841028ffa494b8b69ffc14de8e5aa6cf03c4e534ef9f3ee83cb18a'
-const TOKENS = {
-  unsplash: process.env.UNSPLASH_ACCESS_TOKEN
-}
-
 export default class Search extends Component {
   constructor() {
     super()
@@ -51,30 +47,8 @@ export default class Search extends Component {
     }
   }
 
-  componentWillMount() {
-    const {
-      location: {
-        query: {
-          q = null,
-        } = {}
-      } = {}
-    } = this.context.router
-
-    const words = decodeURIComponent(q).split(',') || []
-
-    words.map(async word => {
-      await fetch(`https://api.unsplash.com/search/photos?page=2&query=${word}&access_token=${TOKENS.unsplash}`)
-        .then(res => res.json())
-        .then(json => {
-          this.setState({
-            words,
-            images: this.state.images.concat(json.results),
-            loadingWords: false,
-            loadingImages: true,
-          })
-        } )
-    })
-
+  componentDidMount() {
+    this.fetchImages()
   }
 
   render() {
@@ -90,19 +64,28 @@ export default class Search extends Component {
         <h1 className="masonry__headline">Inspiration <span className="masonry__deck">with 230 photos</span> </h1>
 
         <Masonry
-          className={'masonry__list'} // default ''
-          elementType={'ul'} // default 'div'
-          options={masonryOptions} // default {}
-          disableImagesLoaded={false} // default false
-          updateOnEachImageLoad={false} // default false and works only if disableImagesLoaded is false
+          className={'masonry__list'}
+          elementType={'ul'}
+          options={masonryOptions}
+          disableImagesLoaded={false}
+          updateOnEachImageLoad
         >
-          {this.state.images.map(image => (
+          {this.state.images.map(image => {
+            return(
             <li key={image.id} className="masonry__item">
-              <Link to={{ pathname: '/search/zoom/', query: { image: image.urls.regular } }}>
-                <img src={image.urls.regular} className="masonry__image" role="presentation" />
+              <Link to={{
+                pathname: '/search/zoom/',
+                query: {
+                  image: image.url,
+                  download: image.download,
+                }
+              }}>
+                <LazyLoad throttle={200} height={200} once offset={100} >
+                  <img src={image.small} className="masonry__image" role="presentation" />
+                </LazyLoad>
               </Link>
             </li>
-          ))}
+          )})}
 
           {demo.map(image => (
             <li key={image} className="masonry__item">
@@ -120,6 +103,35 @@ export default class Search extends Component {
         </div>
       </div>
     )
+  }
+
+  fetchImages() {
+
+    const {
+      location: {
+        query: {
+          q = null,
+        } = {}
+      } = {}
+    } = this.context.router
+
+    const words = decodeURIComponent(q).split(',') || []
+
+    fetch(`http://localhost:5000/?word=business`)
+      .then(res => res.json())
+      .then(json => {
+        console.log(json);
+        this.setState({
+          words,
+          images: this.state.images.concat(json),
+          loadingWords: false,
+          loadingImages: true,
+        })
+      })
+
+    words.map(word => {
+      const encodedWord = encodeURIComponent(word)
+    })
   }
 }
 
