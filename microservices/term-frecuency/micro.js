@@ -1,13 +1,13 @@
-const keyword_extractor = require("keyword-extractor");
-const querystring = require('querystring');
+const keyword_extractor = require("keyword-extractor")
+const querystring = require('querystring')
 const natural = require('natural')
 const express = require('express')
 const cors = require('cors')
-const app = express();
+const app = express()
 
-app.set('port', (process.env.PORT || 5000));
+app.set('port', (process.env.PORT || 5000))
 
-app.use(cors());
+app.use(cors())
 
 const extractorOptions = {
   language: "english",
@@ -17,12 +17,12 @@ const extractorOptions = {
 }
 
 app.post('/', function(req, res, next){
-  const body = querystring.parse(req.url.replace('/?', '')) || { body: '' };
+  const body = querystring.parse(req.url.replace('/?', '')) || { body: '' }
 
   if ('body' in body) {
     const save = []
     const tfidf = new natural.TfIdf()
-    const data = keyword_extractor.extract(body.body, extractorOptions);
+    const data = keyword_extractor.extract(body.body, extractorOptions)
 
     tfidf.addDocument(data)
 
@@ -32,10 +32,10 @@ app.post('/', function(req, res, next){
       }
     })
 
-    res.json({ words: save });
+    res.json({ words: save })
   }
-});
+})
 
 app.listen(app.get('port'), function() {
-  console.log('Node app is running on port', app.get('port'));
-});
+  console.log('Node app is running on port', app.get('port'))
+})
