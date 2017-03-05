@@ -7,8 +7,7 @@ const co = require('co');
 const app = express()
 
 const TOKENS = {
-  unsplash: process.env.REACT_APP_UNSPLASH_ACCESS_TOKEN,
-  pexels: process.env.REACT_APP_PEXELS_ACCESS_TOKEN,
+  unsplash: process.env.UNSPLASH_ACCESS_TOKEN,
 }
 
 function fetchAllAPIs(query) {
@@ -85,7 +84,6 @@ app.get('/', function(req, res, next){
 
 function normalizeData(array) {
   return array.reduce(function(accumulator, element) {
-    let currentElement = {}
 
     try {
       return [ ...accumulator, {
