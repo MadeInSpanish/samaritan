@@ -2,7 +2,7 @@
 
 # dependencies
 /node_modules
-microservices/node_modules/
+*/*/node_modules/
 
 # testing
 /coverage
