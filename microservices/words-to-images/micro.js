@@ -43,7 +43,10 @@ function fetchAllAPIs(query) {
 
 
     // TODO
-    // get pixabay api to work
+    // check the response for ----pixabay.com----, the request for the access_token will be
+    // answered within 24 hours
+    //
+    // state: REQUESTING...
     // https://pixabay.com/api/docs/
 
     // TODO
@@ -62,6 +65,8 @@ function fetchAllAPIs(query) {
     //   download
     //   small
     // }
+
+
 
     // console.log(JSON.parse(splashBase.text).images);
 
