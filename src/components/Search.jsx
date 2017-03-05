@@ -50,7 +50,9 @@ export default class Search extends Component {
 
   componentWillMount() {
     const { location: { query } } = this.props
-    fetch(`https://machine-robot.herokuapp.com/?body=${query.q}`)
+    fetch(`https://microservices-samaritan.now.sh/?body=${query.q}`, {
+      method: 'POST'
+    })
       .then(res => res.json())
       .then(json => {
         this.setState({

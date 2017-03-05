@@ -14,7 +14,7 @@ function onInstall(e) {
 
 function shortenUrl(text) {
   var url = UrlShortener.Url.insert({
-    longUrl: "http://localhost:3000/search/?q=" + text
+    longUrl: "https://samaritan.now.sh/search/?q=" + text
   });
   return url.id;
 }
@@ -26,10 +26,10 @@ function getImages() {
   // Get the text of the document
   var text = doc.getBody().getText();
   text = text
-  .replace(/(^[ \t]*\n)/gm, "")
-  .replace(/(\r\n|\n|\r)/gm," ")
-  .replace(/\d+/g, '')
-  .replace(/-/g, "");
+    .replace(/(^[ \t]*\n)/gm, "")
+    .replace(/(\r\n|\n|\r)/gm," ")
+    .replace(/\d+/g, '')
+    .replace(/-/g, "");
 
   var text = encodeURIComponent(text);
   var url = shortenUrl(text)

@@ -16,7 +16,7 @@ const extractorOptions = {
   remove_duplicates: true,
 }
 
-app.get('/', function(req, res, next){
+app.post('/', function(req, res, next){
   const body = querystring.parse(req.url.replace('/?', '')) || { body: '' };
 
   if ('body' in body) {
