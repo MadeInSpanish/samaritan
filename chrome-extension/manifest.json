@@ -4,6 +4,11 @@
   "name": "The Machine",
   "description": "This extension shows a Royalty Free Images for your content",
   "version": "1.0",
+  "icons": {
+    "18": "icons/icon18.png",
+    "48": "icons/icon48.png",
+    "48": "icons/icon128.png"
+  },
 
   "browser_action": {
     "default_popup": "popup.html",
@@ -18,10 +23,5 @@
       "matches": ["https://medium.com/*"],
       "js": ["mediumArticle.js"]
     }
-  ],
-  "icons": {
-    "16": "icons/icon16.png",
-    "48": "icons/icon48.png",
-    "48": "icons/icon128.png"
-  }
+  ]
 }
