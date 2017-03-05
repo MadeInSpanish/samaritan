@@ -49,30 +49,29 @@ export default class Search extends Component {
   }
 
   componentWillMount() {
-    const { location: { query } } = this.props
-    fetch(`https://microservices-samaritan.now.sh/?body=${query.q}`, {
-      method: 'POST'
-    })
-      .then(res => res.json())
-      .then(json => {
-        this.setState({
-          words: json.words,
-          loadingWords: false,
-          loadingImages: true,
-        })
+    const {
+      location: {
+        query: {
+          q = null,
+        } = {}
+      } = {}
+    } = this.props
 
-        json.words.map(async word => {
-          await fetch(`https://api.unsplash.com/search/photos?page=2&query=${word}&access_token=${accessToken}`)
-            .then(res => res.json())
-            .then(json => {
-              this.setState({
-                images: this.state.images.concat(json.results),
-                loadingWords: false,
-                loadingImages: true,
-              })
-            } )
-        })
-      })
+    const words = decodeURIComponent(q).split(',') || []
+
+    words.map(async word => {
+      await fetch(`https://api.unsplash.com/search/photos?page=2&query=${word}&access_token=${accessToken}`)
+        .then(res => res.json())
+        .then(json => {
+          this.setState({
+            words,
+            images: this.state.images.concat(json.results),
+            loadingWords: false,
+            loadingImages: true,
+          })
+        } )
+    })
+
   }
 
   componentDidUpdate(prevProps, prevState) {

@@ -8,9 +8,23 @@ function handleTabs(tabs){
 }
 
 function handleMessageResponse(response) {
+  console.log('response', response);
   if (typeof response === 'string' && response.length > 140) {
-    var URL = 'https://samaritan.now.sh/search/?q=' + encodeURIComponent(response);
-    chrome.tabs.create({ url: URL });
+
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function() {
+      try {
+        var words = JSON.parse(xhr.responseText).words
+        var URL = 'https://samaritan.now.sh/search/?q=' + encodeURIComponent(words.join());
+        chrome.tabs.create({ url: URL });
+      } catch (e) {
+        console.log('not yet');
+      }
+    };
+
+    xhr.open("POST", 'https://microservices-samaritan.now.sh/?body=' + response, true);
+    xhr.send();
+
   }
   // TODO validate when is less than 140 chars
 }
