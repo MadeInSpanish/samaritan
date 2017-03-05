@@ -9,9 +9,32 @@
     <title>Getting Started Extension's Popup</title>
     <style>
       body {
-        font-family: "Segoe UI", "Lucida Grande", Tahoma, sans-serif;
-        font-size: 100%;
+        font-family : "Segoe UI",
+                      "Lucida Grande",
+                      Tahoma,
+                      sans-serif;
+        font-size   : 100%;
+        text-align  : center;
       }
+      .modal__btn {
+        font-size: 14px;
+
+        width: 190px;
+        padding: 15px;
+
+        cursor: pointer;
+        text-transform: uppercase;
+
+        color: #fff;
+        border: 0;
+        outline: 0;
+        background: #29c28a;
+      }
+
+      .modal__btn:hover {
+        background: #20986c;
+      }
+
     </style>
 
     <!--
@@ -22,8 +45,7 @@
      -->
   </head>
   <body>
-    <h3>The Machine</h3>
-    <button id="getRelatedImages">Get Related Images</button>
+    <button id="getRelatedImages" class="modal__btn">Get Related Images</button>
     <script src="popup.js"></script>
   </body>
 </html>
