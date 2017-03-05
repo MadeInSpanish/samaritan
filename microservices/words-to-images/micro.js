@@ -12,17 +12,24 @@ const TOKENS = {
   pixabay: process.env.PIXABAY_ACCESS_TOKEN,
 }
 
-function fetchAllAPIs(query) {
+function fetchAllAPIs(query = 'business') {
   return function* generator() {
+    let unsplash = [], pixabay = []
 
     const images = []
-    // const unsplash = yield superagent
-    //   .get('https://api.unsplash.com/search/photos')
-    //   .timeout({ response: 5000 })
-    //   .query({ access_token: TOKENS.unsplash })
-    //   .query({ query })
+    try {
+      unsplash = yield superagent
+        .get('https://api.unsplash.com/search/photos')
+        .timeout({ response: 5000 })
+        .query({ access_token: TOKENS.unsplash })
+        .query({ query })
+    } catch (e) {
+      console.log('unsplash', e)
+    }
 
-    // REALLY SLOW API SPLASHBASE
+    // Comment this api because is ========= REALLY SLOW API =============
+    // all images on the results are HD and takes forever to load
+    // on the page search, ideally we will use it when they provide thumbs
     //
     // const splashBase = yield superagent
     //   .get('http://www.splashbase.co/api/v1/images/search')
@@ -42,20 +49,24 @@ function fetchAllAPIs(query) {
     //   .query({ per_page: 15 })
     //   .query({ page: 1 })
 
-    // TODO
+    // TODO march-5-17
     // check the response for ----pixabay.com----, the request for the access_token will be
-    // answered within 24 hours
+    // answered within 24 hours, for HQ images, although not necessary
     //
     // state: REQUESTING...
     // https://pixabay.com/api/docs/
 
-    const pixabay = yield superagent
-      .get('https://pixabay.com/api/')
-      .timeout({ response: 5000 })
-      .query({ key: TOKENS.pixabay })
-      .query({ image_type: 'photo' })
-      .query({ q: query })
-
+    try {
+      pixabay = yield superagent
+        .get('https://pixabay.com/api/')
+        .timeout({ response: 5000 })
+        .query({ key: TOKENS.pixabay })
+        // accepted image_type: all, photo, illustration, vector
+        .query({ image_type: 'all' })
+        .query({ q: query })
+    } catch (e) {
+      console.log('pixabay', e)
+    }
 
     // TODO
     // get fotolia api to work
@@ -64,18 +75,8 @@ function fetchAllAPIs(query) {
     // TODO
     // handle errors with default []
 
-    // TODO
-    // normalize all this data to send only with small images
-    //
-    // {
-    //   id
-    //   url
-    //   download
-    //   small
-    // }
-    console.log(JSON.parse(pixabay.text).hits);
     return images
-      // .concat(normalizeData(JSON.parse(unsplash.text).results))
+      .concat(normalizeData(JSON.parse(unsplash.text).results, 'unsplash') )
       // .concat(normalizeData(JSON.parse(splashBase.text).images))
       .concat(normalizeData(JSON.parse(pixabay.text).hits, 'pixabay'))
       // .concat(JSON.parse(pexels.text).photos)
