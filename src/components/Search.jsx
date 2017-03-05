@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, PropTypes } from 'react'
 import Masonry from 'react-masonry-component'
 import { Link } from 'react-router'
 
@@ -34,7 +34,10 @@ var masonryOptions = {
     transitionDuration: 300
 }
 
-const accessToken = '76e6553f7e841028ffa494b8b69ffc14de8e5aa6cf03c4e534ef9f3ee83cb18a'
+// '76e6553f7e841028ffa494b8b69ffc14de8e5aa6cf03c4e534ef9f3ee83cb18a'
+const TOKENS = {
+  unsplash: process.env.UNSPLASH_ACCESS_TOKEN
+}
 
 export default class Search extends Component {
   constructor() {
@@ -55,12 +58,12 @@ export default class Search extends Component {
           q = null,
         } = {}
       } = {}
-    } = this.props
+    } = this.context.router
 
     const words = decodeURIComponent(q).split(',') || []
 
     words.map(async word => {
-      await fetch(`https://api.unsplash.com/search/photos?page=2&query=${word}&access_token=${accessToken}`)
+      await fetch(`https://api.unsplash.com/search/photos?page=2&query=${word}&access_token=${TOKENS.unsplash}`)
         .then(res => res.json())
         .then(json => {
           this.setState({
@@ -74,10 +77,6 @@ export default class Search extends Component {
 
   }
 
-  componentDidUpdate(prevProps, prevState) {
-    console.log('state', this.state);
-  }
-
   render() {
     return (
       <div>
@@ -87,7 +86,9 @@ export default class Search extends Component {
             <li className="masonry__tags" key={`${word}${index}`}>{word}</li>
           )}
         </ul>
+
         <h1 className="masonry__headline">Inspiration <span className="masonry__deck">with 230 photos</span> </h1>
+
         <Masonry
           className={'masonry__list'} // default ''
           elementType={'ul'} // default 'div'
@@ -120,4 +121,8 @@ export default class Search extends Component {
       </div>
     )
   }
+}
+
+Search.contextTypes = {
+  router: PropTypes.object.isRequired,
 }
