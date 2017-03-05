@@ -4,21 +4,23 @@ const express = require('express')
 const cors = require('cors')
 const co = require('co');
 
+const normalizers = require('./normalize-data')
 const app = express()
 
 const TOKENS = {
   unsplash: process.env.UNSPLASH_ACCESS_TOKEN,
+  pixabay: process.env.PIXABAY_ACCESS_TOKEN,
 }
 
 function fetchAllAPIs(query) {
   return function* generator() {
 
     const images = []
-    const unsplash = yield superagent
-      .get('https://api.unsplash.com/search/photos')
-      .timeout({ response: 5000 })
-      .query({ access_token: TOKENS.unsplash })
-      .query({ query })
+    // const unsplash = yield superagent
+    //   .get('https://api.unsplash.com/search/photos')
+    //   .timeout({ response: 5000 })
+    //   .query({ access_token: TOKENS.unsplash })
+    //   .query({ query })
 
     // REALLY SLOW API SPLASHBASE
     //
@@ -32,7 +34,6 @@ function fetchAllAPIs(query) {
     // Please explain briefly how and where you want to integrate our photos.
     // We're excited to hear about your idea!
     //
-    //
     // const pexels = yield superagent
     //   .get('http://api.pexels.com/v1/search')
     //   .set({ Authorization: TOKENS.pexels })
@@ -41,13 +42,20 @@ function fetchAllAPIs(query) {
     //   .query({ per_page: 15 })
     //   .query({ page: 1 })
 
-
     // TODO
     // check the response for ----pixabay.com----, the request for the access_token will be
     // answered within 24 hours
     //
     // state: REQUESTING...
     // https://pixabay.com/api/docs/
+
+    const pixabay = yield superagent
+      .get('https://pixabay.com/api/')
+      .timeout({ response: 5000 })
+      .query({ key: TOKENS.pixabay })
+      .query({ image_type: 'photo' })
+      .query({ q: query })
+
 
     // TODO
     // get fotolia api to work
@@ -65,14 +73,11 @@ function fetchAllAPIs(query) {
     //   download
     //   small
     // }
-
-
-
-    // console.log(JSON.parse(splashBase.text).images);
-
+    console.log(JSON.parse(pixabay.text).hits);
     return images
-      .concat(normalizeData(JSON.parse(unsplash.text).results))
+      // .concat(normalizeData(JSON.parse(unsplash.text).results))
       // .concat(normalizeData(JSON.parse(splashBase.text).images))
+      .concat(normalizeData(JSON.parse(pixabay.text).hits, 'pixabay'))
       // .concat(JSON.parse(pexels.text).photos)
   }
 }
@@ -89,35 +94,36 @@ app.get('/', function(req, res, next){
 
 })
 
-function normalizeData(array) {
+function normalizeData(array, from) {
   return array.reduce(function(accumulator, element) {
 
-    try {
-      return [ ...accumulator, {
-        id: element.id,
-        url: element.urls.regular,
-        download: element.links.download,
-        small: element.urls.thumb,
-      } ]
-    } catch (err) { }
+    switch (from) {
+      case 'unsplash':
+        return [ ...accumulator,  normalizers.unsplash(element) ]
 
-    try {
-      return [ ...accumulator, {
-        id: element.id,
-        url: element.url,
-        download: element.large_url,
-        small: element.url,
-      } ]
-    } catch (err) { }
+      case 'pixabay':
+        return [ ...accumulator, normalizers.pixabay(element) ]
 
-    try {
-      return [ ...accumulator, {
-        id: element.url,
-        url: element.src.large,
-        download: element.src.original,
-        small: element.src.small,
-      } ]
-    } catch (err) { }
+      case 'splashbase':
+        return [ ...accumulator,  normalizers.splashbase(element)]
+      default:
+        return []
+    }
+
+
+    // try {
+    //   // splashBase
+    // } catch (err) { }
+    //
+    // try {
+    //   // pexels
+    //   return [ ...accumulator, {
+    //     id: element.url,
+    //     url: element.src.large,
+    //     download: element.src.original,
+    //     small: element.src.small,
+    //   } ]
+    // } catch (err) { }
 
   }, [])
 }
