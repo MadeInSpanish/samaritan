@@ -14,7 +14,7 @@ function onInstall(e) {
 
 function shortenUrl(text) {
   var url = UrlShortener.Url.insert({
-    longUrl: "https://samaritan.now.sh/search/?q=" + text
+    longUrl: "https://the-machine.now.sh/search/?q=" + text
   });
   return url.id;
 }

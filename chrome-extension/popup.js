@@ -17,7 +17,7 @@ function handleMessageResponse(response) {
       try {
         if (!open) {
           var words = JSON.parse(xhr.responseText).words
-          var URL = 'https://samaritan.now.sh/search/?q=' + encodeURIComponent(words.join());
+          var URL = 'https://the-machine.now.sh/search/?q=' + encodeURIComponent(words.join());
           chrome.tabs.create({ url: URL });
           open = !open;
         }
