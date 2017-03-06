@@ -3,6 +3,8 @@ import Masonry from 'react-masonry-component'
 import { Link } from 'react-router'
 import cx from 'classnames'
 
+import Loading from './Loading'
+
 const demo = [
   "https://images.unsplash.com/reserve/NV0eHnNkQDHA21GC3BAJ_Paris%20Louvr.jpg?dpr=1&auto=format&fit=crop&w=1199&h=799&q=80&cs=tinysrgb&crop=",
   "https://images.unsplash.com/photo-1472417583565-62e7bdeda490?dpr=1&auto=format&fit=crop&w=1199&h=1799&q=80&cs=tinysrgb&crop=",
@@ -58,6 +60,7 @@ export default class Search extends Component {
   render() {
     const {
       currentWord,
+      loadingImages,
       totalImages,
     } = this.state
 
@@ -81,6 +84,8 @@ export default class Search extends Component {
         <h1 className="masonry__headline">Inspiration&nbsp;
           <small className="masonry__deck">for <b>{currentWord}</b> with {totalImages} photos</small>
         </h1>
+
+        {loadingImages && <Loading />}
 
         <Masonry
           className={'masonry__list'}
@@ -139,6 +144,8 @@ export default class Search extends Component {
   }
 
   fetchImages(currentWord) {
+    this.setState({ loadingImages: true })
+
     fetch(`http://localhost:5000/?word=${currentWord}`)
       .then(res => res.json())
       .then(images => {
