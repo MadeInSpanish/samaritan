@@ -28,7 +28,7 @@ function handleMessageResponse(response) {
 
     xhr.open(
       "POST",
-      'https://microservices-samaritan.now.sh/?body=' + encodeURIComponent(response),
+      'https:///term-frecuency.herokuapp.com/?body=' + encodeURIComponent(response),
       true
     );
     xhr.send();

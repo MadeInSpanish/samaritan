@@ -57,7 +57,7 @@ export default class Home extends Component {
     event.preventDefault()
 
     fetch(
-      `https://microservices-samaritan.now.sh/?body=${encodeURIComponent(this.state.text)}`,
+      `https:///term-frecuency.herokuapp.com/?body=${encodeURIComponent(this.state.text)}`,
        { method: 'POST' }
      )
       .then(res => res.json())
