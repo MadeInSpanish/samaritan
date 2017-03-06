@@ -1,0 +1,8 @@
+{
+  "name": "the-machine",
+  "alias": "the-machine",
+  "type": "npm",
+  "env": {
+    "NODE_ENV": "production"
+  }
+}
