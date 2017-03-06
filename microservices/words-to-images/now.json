@@ -1,0 +1,8 @@
+{
+  "name": "words-to-images",
+  "alias": "words-to-images",
+  "type": "npm",
+  "env": {
+    "NODE_ENV": "production"
+  }
+}

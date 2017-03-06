@@ -1,19 +1,21 @@
 {
-  "name": "term-frequency",
-  "version": "0.2.5",
+  "name": "term-frecuency",
+  "version": "1.0.0",
   "description": "A keywords extractor",
-  "engines": {
-    "node": "5.9.1"
-  },
   "main": "micro.js",
   "scripts": {
-    "start": "node micro.js"
+    "dev": "nodemon micro.js",
+    "start": "node micro.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
     "cors": "^2.8.1",
     "express": "^4.14.1",
     "keyword-extractor": "0.0.13",
     "natural": "^0.5.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.11.0"
   },
   "repository": {
     "type": "git",

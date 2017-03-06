@@ -2,6 +2,16 @@
   "name": "samaritan",
   "version": "0.1.0",
   "private": true,
+  "config": {
+    "wordsToImages": {
+      "development": "http://localhost:5001",
+      "production": "https://words-to-images.now.sh"
+    },
+    "termFrecuency": {
+      "development": "http://localhost:5002",
+      "production": "https://term-frecuency.now.sh"
+    }
+  },
   "dependencies": {
     "classnames": "^2.2.5",
     "pushstate-server": "^2.2.2",
@@ -21,6 +31,7 @@
     "watch-css": "npm run build-css && node-sass src/ -o src/ --watch --recursive",
     "start-js": "react-scripts start",
     "dev": "npm-run-all -p watch-css start-js",
+    "dev:all": "npm-run-all -p watch-css start-js & node microservices/term-frecuency/micro & node microservices/words-to-images/micro",
     "start": "pushstate-server build",
     "build": "npm run build-css && react-scripts build",
     "test": "react-scripts test --env=jsdom",

@@ -1,0 +1,8 @@
+{
+  "name": "term-frecuency",
+  "alias": "term-frecuency",
+  "type": "npm",
+  "env": {
+    "NODE_ENV": "production"
+  }
+}

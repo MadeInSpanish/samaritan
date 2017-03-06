@@ -2,6 +2,10 @@ import React, { Component } from 'react'
 import { browserHistory } from 'react-router'
 
 import HowTo from './HowTo'
+import PACKAGE from '../../package.json'
+
+const ENDPOINT = PACKAGE.config.termFrecuency[process.env.NODE_ENV]
+console.log(ENDPOINT)
 
 export default class Home extends Component {
   constructor() {
@@ -55,15 +59,12 @@ export default class Home extends Component {
 
   handleSubmit(event) {
     event.preventDefault()
+    const text = encodeURIComponent(this.state.text);
 
-    fetch(
-      `https:///term-frecuency.herokuapp.com/?body=${encodeURIComponent(this.state.text)}`,
-       { method: 'POST' }
-     )
+    fetch(`${ENDPOINT}/?body=${text}`, { method: 'POST' })
       .then(res => res.json())
       .then(json => {
         browserHistory.push(`/search/?q=${encodeURIComponent(json.words.join())}`)
       })
-
   }
 }

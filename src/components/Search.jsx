@@ -4,6 +4,7 @@ import { Link } from 'react-router'
 import cx from 'classnames'
 
 import Loading from './Loading'
+import PACKAGE from '../../package.json'
 
 const demo = [
   "https://images.unsplash.com/reserve/NV0eHnNkQDHA21GC3BAJ_Paris%20Louvr.jpg?dpr=1&auto=format&fit=crop&w=1199&h=799&q=80&cs=tinysrgb&crop=",
@@ -33,9 +34,12 @@ const demo = [
   "https://images.unsplash.com/photo-1484036218807-91efe1baff2f?dpr=1&auto=format&fit=crop&w=1500&h=1000&q=80&cs=tinysrgb&crop="
 ]
 
-var masonryOptions = {
+const masonryOptions = {
     transitionDuration: 300
 }
+
+const ENDPOINT = PACKAGE.config.wordsToImages[process.env.NODE_ENV]
+console.log(ENDPOINT)
 
 export default class Search extends Component {
   constructor() {
@@ -150,11 +154,11 @@ export default class Search extends Component {
       loadingImages: true,
     })
 
-    fetch(`http://localhost:5000/unsplash?word=${currentWord}`)
+    fetch(`${ENDPOINT}/unsplash?word=${currentWord}`)
       .then(res => res.json())
       .then(this.handleImagesResponse)
 
-    fetch(`http://localhost:5000/pixabay?word=${currentWord}`)
+    fetch(`${ENDPOINT}/pixabay?word=${currentWord}`)
       .then(res => res.json())
       .then(this.handleImagesResponse)
 
@@ -162,7 +166,7 @@ export default class Search extends Component {
     // they also use repeated id on some pictures because the search
     // is not different sometimes, this conflicts with react key prop on li
     //
-    // fetch(`http://localhost:5000/splashbase?word=${currentWord}`)
+    // fetch(`${ENDPOINT}/splashbase?word=${currentWord}`)
     //   .then(res => res.json())
     //   .then(this.handleImagesResponse)
   }
