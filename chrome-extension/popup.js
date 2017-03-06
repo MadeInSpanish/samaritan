@@ -11,11 +11,16 @@ function handleMessageResponse(response) {
   if (typeof response === 'string' && response.length > 140) {
 
     var xhr = new XMLHttpRequest();
+    var open = false;
+    
     xhr.onreadystatechange = function() {
       try {
-        var words = JSON.parse(xhr.responseText).words
-        var URL = 'https://samaritan.now.sh/search/?q=' + encodeURIComponent(words.join());
-        chrome.tabs.create({ url: URL });
+        if (!open) {
+          var words = JSON.parse(xhr.responseText).words
+          var URL = 'https://samaritan.now.sh/search/?q=' + encodeURIComponent(words.join());
+          chrome.tabs.create({ url: URL });
+          open = !open;
+        }
       } catch (e) {
         console.log('not yet');
       }
