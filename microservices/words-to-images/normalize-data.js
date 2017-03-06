@@ -5,11 +5,11 @@ const unsplash = data => ({
   small: data.urls.thumb,
 })
 
-const splashbase = () => ({
-  id: element.id,
-  url: element.url,
-  download: element.large_url,
-  small: element.url,
+const splashbase = data => ({
+  id: data.id,
+  url: data.url,
+  download: data.large_url,
+  small: data.url,
 })
 
 const pixabay = data => ({
@@ -22,13 +22,13 @@ const pixabay = data => ({
   // NOT USED YET ========= REMOVE THIS WHEN API IS APPROVED
 const pexels = data => ({
   // NOT USED YET ========= REMOVE THIS WHEN API IS APPROVED
-  id: element.url,
+  id: data.url,
   // NOT USED YET ========= REMOVE THIS WHEN API IS APPROVED
-  url: element.src.large,
+  url: data.src.large,
   // NOT USED YET ========= REMOVE THIS WHEN API IS APPROVED
-  download: element.src.original,
+  download: data.src.original,
   // NOT USED YET ========= REMOVE THIS WHEN API IS APPROVED
-  small: element.src.small,
+  small: data.src.small,
 })
 
 module.exports = {

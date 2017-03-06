@@ -21,8 +21,8 @@ app.get('/unsplash', function(req, res, next) {
     .timeout({ response: 5000 })
     .query({ access_token: TOKENS.unsplash })
     .query({ query: word })
-    .end((err, data) => {
-      if (err) { res.status(500).send({ error: 'Something failed!' + e }) }
+    .end((err, data = {text: ""}) => {
+      if (err) { return res.status(500).send({ error: 'Something failed!' + err }) }
 
       res.json(normalizeData(JSON.parse(data.text).results, 'unsplash'))
     })
@@ -38,15 +38,15 @@ app.get('/unsplash', function(req, res, next) {
 app.get('/pixabay', function(req, res, next) {
   const { word = '' } = req.query || {}
 
-  pixabay = superagent
+  superagent
     .get('https://pixabay.com/api/')
     .timeout({ response: 5000 })
     .query({ key: TOKENS.pixabay })
     // accepted image_type: all, photo, illustration, vector
     .query({ image_type: 'all' })
     .query({ q: word })
-    .end((err, data) => {
-      if (err) { res.status(500).send({ error: 'Something failed!' + e }) }
+    .end((err, data = {text: ""}) => {
+      if (err) { return res.status(500).send({ error: 'Something failed!' + err }) }
 
       res.json(normalizeData(JSON.parse(data.text).hits, 'pixabay'))
     })
@@ -59,14 +59,14 @@ app.get('/pixabay', function(req, res, next) {
 app.get('/splashbase', function(req, res, next) {
   const { word = '' } = req.query || {}
 
-  const splashbase = yield superagent
+  superagent
     .get('http://www.splashbase.co/api/v1/images/search')
     .timeout({ response: 5000 })
     .query({ query: 'building' })
-    .end((err, data) => {
-      if (err) { res.status(500).send({ error: 'Something failed!' + e }) }
+    .end((err, data = {text: ""}) => {
+      if (err) { return res.status(500).send({ error: 'Something failed!' + err }) }
 
-      res.json(normalizeData(JSON.parse(splashBase.text).images, 'splashbase'))
+      res.json(normalizeData(JSON.parse(data.text).images, 'splashbase'))
     })
 })
 
