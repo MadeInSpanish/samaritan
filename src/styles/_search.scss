@@ -2,6 +2,10 @@
 
   &__deck {
     color: gray;
+    b {
+      border-bottom: 2px solid $sea-green;
+      color: lighten(gray, 20%);
+    }
   }
 
   &__header {
@@ -61,7 +65,7 @@
 .searchp {
   &__infinite {
     letter-spacing: 0.05em;
-    margin: 5vw;
+    margin: 20vw auto;
     text-align: center;
 
     i {
