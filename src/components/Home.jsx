@@ -56,7 +56,10 @@ export default class Home extends Component {
   handleSubmit(event) {
     event.preventDefault()
 
-    fetch(`https://microservices-samaritan.now.sh/?body=${this.state.text}`, { method: 'POST' })
+    fetch(
+      `https://microservices-samaritan.now.sh/?body=${encodeURIComponent(this.state.text)}`,
+       { method: 'POST' }
+     )
       .then(res => res.json())
       .then(json => {
         browserHistory.push(`/search/?q=${encodeURIComponent(json.words.join())}`)

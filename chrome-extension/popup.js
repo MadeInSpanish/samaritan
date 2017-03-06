@@ -12,7 +12,7 @@ function handleMessageResponse(response) {
 
     var xhr = new XMLHttpRequest();
     var open = false;
-    
+
     xhr.onreadystatechange = function() {
       try {
         if (!open) {
@@ -26,7 +26,11 @@ function handleMessageResponse(response) {
       }
     };
 
-    xhr.open("POST", 'https://microservices-samaritan.now.sh/?body=' + response, true);
+    xhr.open(
+      "POST",
+      'https://microservices-samaritan.now.sh/?body=' + encodeURIComponent(response),
+      true
+    );
     xhr.send();
 
   }
