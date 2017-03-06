@@ -6,7 +6,7 @@ export default class Zoom extends Component {
       location: {
         query: {
           image = '',
-          download = ''
+          download = '',
         } = {}
       } = {}
     } = this.props || {}

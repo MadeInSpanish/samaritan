@@ -51,6 +51,7 @@ export default class Search extends Component {
     }
 
     this.handleWordClick = this.handleWordClick.bind(this)
+    this.handleImagesResponse = this.handleImagesResponse.bind(this)
   }
 
   componentDidMount() {
@@ -144,25 +145,47 @@ export default class Search extends Component {
   }
 
   fetchImages(currentWord) {
-    this.setState({ loadingImages: true })
+    this.setState({
+      currentWord,
+      loadingImages: true,
+    })
 
-    fetch(`http://localhost:5000/?word=${currentWord}`)
+    fetch(`http://localhost:5000/unsplash?word=${currentWord}`)
       .then(res => res.json())
-      .then(images => {
-        console.log(images);
-        this.setState({
-          images,
-          currentWord,
-          loadingWords: false,
-          loadingImages: true,
-          totalImages: images.length,
-        })
+      .then(this.handleImagesResponse)
+
+    fetch(`http://localhost:5000/pixabay?word=${currentWord}`)
+      .then(res => res.json())
+      .then(this.handleImagesResponse)
+
+    // Additional to the performance issues introduced by this API
+    // they also use repeated id on some pictures because the search
+    // is not different sometimes, this conflicts with react key prop on li
+    //
+    // fetch(`http://localhost:5000/splashbase?word=${currentWord}`)
+    //   .then(res => res.json())
+    //   .then(this.handleImagesResponse)
+  }
+
+  handleImagesResponse(images) {
+      this.setState({
+        images: this.state.images.concat(images),
+        loadingImages: false,
+        totalImages: this.state.totalImages + images.length || 0,
       })
   }
 
   handleWordClick(e) {
+    // buttons should only have the word and not any html tags
     const currentWord = encodeURIComponent(e.currentTarget.innerHTML)
-    this.fetchImages(currentWord)
+
+    // Make sure the images array is clean on every new search
+    this.setState({
+      images: [],
+      totalImages: 0,
+    }, () => {
+      this.fetchImages(currentWord)
+    })
   }
 }
 

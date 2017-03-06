@@ -1,0 +1,38 @@
+.loading {
+  background-color: $dark-gray;
+  font-size: 14px;
+  letter-spacing: 0.05em;
+  margin-bottom: 35px;
+  padding: 15px;
+  text-align: center;
+
+  &__dots {
+    margin-left: 10px;
+  }
+
+  &__dot {
+    animation: bounce-bouncedelay 1.4s infinite ease-in-out both;
+    background-color: #9198a0;
+    border-radius: 100%;
+    display: inline-block;
+    height: 12px;
+    margin-right: 3px;
+    width: 12px;
+
+    @for $i from 1 through 3 {
+      &:nth-child(#{$i}) {
+        animation-delay: 0.16s * $i
+      }
+    }
+  }
+}
+
+@keyframes bounce-bouncedelay {
+  0%,80%,to {
+    transform: scale(0)
+  }
+
+  40% {
+    transform: scale(1)
+  }
+}
