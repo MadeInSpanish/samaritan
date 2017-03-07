@@ -46,7 +46,7 @@ export default class Home extends Component {
           <br />
           <input type="submit" value="Submit" className="homeP__submit"/>
           &nbsp;or&nbsp;
-          <a href={`${ENDPOINT}/download`} className="homeP__download">
+          <a href={`${ENDPOINT}/download`} className="homeP__download" target="_blank">
             <i className="material-icons">file_download</i> Download a chrome-extension
           </a>
         </form>
