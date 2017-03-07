@@ -4,10 +4,9 @@ import { browserHistory } from 'react-router'
 import HowTo from './HowTo'
 import PACKAGE from '../../package.json'
 
-const ENDPOINT = PACKAGE.config.termFrecuency[process.env.NODE_ENV]
-console.log(ENDPOINT)
-
-const ENDPOINT = 'fsa'
+const TERM_FRECUENCY_ENDPOINT = PACKAGE.config.termFrecuency[process.env.NODE_ENV]
+const DOWNLOAD_ENDPOINT = PACKAGE.config.download[process.env.NODE_ENV]
+console.log(TERM_FRECUENCY_ENDPOINT, DOWNLOAD_ENDPOINT)
 
 export default class Home extends Component {
   constructor() {
@@ -67,7 +66,7 @@ export default class Home extends Component {
     event.preventDefault()
     const text = encodeURIComponent(this.state.text);
 
-    fetch(`${ENDPOINT}/?body=${text}`, { method: 'POST' })
+    fetch(`${TERM_FRECUENCY_ENDPOINT}/?body=${text}`, { method: 'POST' })
       .then(res => res.json())
       .then(json => {
         browserHistory.push(`/search/?q=${encodeURIComponent(json.words.join())}`)

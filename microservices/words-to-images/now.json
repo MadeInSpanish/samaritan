@@ -3,6 +3,8 @@
   "alias": "words-to-images",
   "type": "npm",
   "env": {
-    "NODE_ENV": "production"
+    "NODE_ENV": "production",
+    "UNSPLASH_ACCESS_TOKEN": "76e6553f7e841028ffa494b8b69ffc14de8e5aa6cf03c4e534ef9f3ee83cb18a",
+    "PIXABAY_ACCESS_TOKEN": "4735460-4fac457f7d3f3a31829812207"
   }
 }

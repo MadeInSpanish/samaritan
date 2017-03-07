@@ -3,6 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "config": {
+    "download": {
+      "development": "http://localhost:5003",
+      "production": "https://download-chrome-extension.now.sh"
+    },
     "wordsToImages": {
       "development": "http://localhost:5001",
       "production": "https://words-to-images.now.sh"
