@@ -7,6 +7,8 @@ import PACKAGE from '../../package.json'
 const ENDPOINT = PACKAGE.config.termFrecuency[process.env.NODE_ENV]
 console.log(ENDPOINT)
 
+const ENDPOINT = 'fsa'
+
 export default class Home extends Component {
   constructor() {
     super()
@@ -44,6 +46,10 @@ export default class Home extends Component {
           />
           <br />
           <input type="submit" value="Submit" className="homeP__submit"/>
+          &nbsp;or&nbsp;
+          <a href={`${ENDPOINT}/download`} className="homeP__download">
+            <i className="material-icons">file_download</i> Download a chrome-extension
+          </a>
         </form>
 
         <HowTo />

@@ -13,6 +13,22 @@
     }
   }
 
+  &__download {
+    background-color: $dark-gray;
+    color: #fff;
+    text-decoration: none;
+    line-height: 1;
+    padding: 16px;
+    &:hover {
+      background-color: lighten($dark-gray, 15%);
+    }
+
+    i {
+      position: relative;
+      top: 7px;
+    }
+  }
+
   &__eg {
     background-color: transparent;
     border: 0;
@@ -68,5 +84,9 @@
     transition: all 0.3 ease;
     max-width: 300px;
     cursor: pointer;
+
+    &:hover {
+      background: lighten(#29c28a, 10%);
+    }
   }
 }
