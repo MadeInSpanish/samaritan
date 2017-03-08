@@ -1,7 +1,0 @@
-{
-  "name": "The Machine",
-  "description": "Keywords extractors",
-  "repository": "https://github.com/anamariasosam/samaritan",
-  "keywords": ["keywords", "blog", "images"],
-  "image": "heroku/nodejs"
-}
