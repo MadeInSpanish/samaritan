@@ -17,7 +17,7 @@ function handleMessageResponse(response) {
       try {
         if (!open) {
           var words = JSON.parse(xhr.responseText).words
-          var URL = 'https://the-machine.now.sh/search/?q=' + encodeURIComponent(words.join());
+          var URL = 'https://machine.now.sh/search/?q=' + encodeURIComponent(words.join());
           chrome.tabs.create({ url: URL });
           open = !open;
         }
@@ -28,7 +28,7 @@ function handleMessageResponse(response) {
 
     xhr.open(
       "POST",
-      'https:///term-frecuency.herokuapp.com/?body=' + encodeURIComponent(response),
+      'https://term-frecuency.now.sh/?body=' + encodeURIComponent(response),
       true
     );
     xhr.send();
