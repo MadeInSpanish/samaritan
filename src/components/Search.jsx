@@ -126,7 +126,7 @@ export default class Search extends Component {
         <div className="searchp__infinite">
           <i className="material-icons">camera_enhance</i>
           <br />
-          Let us know, <Link to='contact' className="u_link">what you think</Link>
+          Let us know, <Link to='/contact/' className="u_link">what you think</Link>
         </div>
       </div>
     )
